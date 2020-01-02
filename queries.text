@@ -1,0 +1,54 @@
+create database base;
+use base;
+
+create table user(
+id int AUTO_INCREMENT PRIMARY Key,
+email varchar(60) not null,
+pass varchar(8) not null
+);
+
+
+create table post( 
+id int AUTO_INCREMENT primary KEY, 
+text text, 
+image text, 
+date varchar(12) not null, 
+userN int, FOREIGN KEY(userN) REFERENCES user(id) 
+);
+
+
+
+
+
+
+
+let data ={
+    email:"hola@hotmail.com",
+    password:"123456"
+}
+
+let xhr = new XMLHttpRequest();
+xhr.onreadystatechange = ()=>{
+    if(xhr.status==200 && xhr.readyState==4){
+        let res = JSON.parse(xhr.responseText);
+        console.log(res);
+    }
+
+};
+
+xhr.open("POST","https://pratices.000webhostapp.com/user.php",true);
+xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+xhr.send(`data=`${JSON.stringify(data)}&action=addUser`);
+
+let xhr = new XMLHttpRequest();
+xhr.onreadystatechange = ()=>{
+    if(xhr.status==200 && xhr.readyState==4){
+        let res = JSON.parse(xhr.responseText);
+        console.log(res);
+    }
+
+};
+
+xhr.open("POST","https://pratices.000webhostapp.com/user2.php",true);
+xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+xhr.send(`data=`${JSON.stringify(data)}&action=logUser`);
